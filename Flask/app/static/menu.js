@@ -116,14 +116,27 @@ var shoppingCart = (function() {
         }
         return cartCopy;
     }
-});
+
+     // cart : Array
+  // Item : Object/Class
+  // addItemToCart : Function
+  // removeItemFromCart : Function
+  // removeItemFromCartAll : Function
+  // clearCart : Function
+  // countCart : Function
+  // totalCart : Function
+  // listCart : Function
+  // saveCart : Function
+  // loadCart : Function
+  return obj;
+})();
 
 
 // *****************************************
 // Triggers / Events
 // ***************************************** 
 // Add item
-$('.add-to-cart').onClick(function(event) {
+$('.add-to-cart').on("click", function(event) {
     event.preventDefault();
     var name = $(this).data('name');
     var price = Number($(this).data('price'));
@@ -133,7 +146,7 @@ $('.add-to-cart').onClick(function(event) {
 });
 
 // Clear items
-$('.clear-cart').onClick(function() {
+$('.clear-cart').on("click", function() {
     shoppingCart.clearCart();
     displayCart();
 });
