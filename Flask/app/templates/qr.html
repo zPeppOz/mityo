@@ -1,29 +1,32 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <title>
-            QR
-        </title>
-        <script>
-            window.onload = function(){
-                var genera = document.getElementById("btn");
-                genera.onclick = function (){
-                    var formData = document.getElementById("text").value;
-                    location.href = "/genera_qr/" + formData;
-                };
-            }
-        </script>
-        <meta charset="UTF-8"/>
-    </head>
-    <body>
-        <div class="rendered-form">
-            <div class="formbuilder-text form-group field-text">
-                <label for="text" class="formbuilder-text-label">Numero Tavolo</label>
-                <input type="text" class="form-control" name="text" access="false" id="text">
-            </div>
-            <div class="formbuilder-button form-group field-button">
-                <button id="btn">Genera</button>
-            </div>
+
+<head>
+    <title>
+        QR
+    </title>
+    <script>
+        window.onload = function() {
+            var genera = document.getElementById("btn");
+            genera.onclick = function() {
+                var formData = document.getElementById("text").value;
+                location.href = "/genera_qr/" + formData;
+            };
+        }
+    </script>
+    <meta charset="UTF-8" />
+</head>
+
+<body>
+    <div class="rendered-form">
+        <div class="formbuilder-text form-group field-text">
+            <label for="text" class="formbuilder-text-label">Numero Tavolo</label>
+            <input type="text" class="form-control" name="text" access="false" id="text">
         </div>
-    </body>
+        <div class="formbuilder-button form-group field-button">
+            <button id="btn">Genera</button>
+        </div>
+    </div>
+</body>
+
 </html>

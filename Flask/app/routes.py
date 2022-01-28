@@ -74,3 +74,4 @@ def menu(n):
     listApe = list(collMenu.find({'$text': {'$search': 'aperitivi'} }))
     jApe = loads(dumps(listApe, indent = 2))
     return render_template('menu.html', Caffetteria=jCaffe, bibite=jBibite, Aperitivi=jApe, Cocktail=jCocktail, CocktailAn=jCocktailAn, VinoR=jVinoR, VinoB=jVinoB, Birre=jBirre)
+    
