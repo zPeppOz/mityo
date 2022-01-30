@@ -183,10 +183,17 @@ $(document).ready(function() {
     function displayCart() {
         var cartArray = shoppingCart.listCart();
         var output = "";
+        output = "<tr>" +
+            "<th style='width: 10%'>Articolo</th>" +
+            "<th style='width: 5%'>Prezzo</th>" +
+            "<th style='width: 20%'></th>" +
+            "<th style='width: 5%'></th>" +
+            "<th style='width: 8%'>Subtotale</th>" +
+            "</tr>"
         for (var i in cartArray) {
             output += "<tr>" +
                 "<td>" + cartArray[i].name + "</td>" +
-                "<td>(" + cartArray[i].price + ")</td>" +
+                "<td>(" + cartArray[i].price + " €)</td>" +
                 "<td><div class='input-group'><button class='minus-item input-group-addon btn btn-primary' data-name='" + cartArray[i].name + "'>-</button>" +
                 "<input type='number' class='item-count form-control' data-name='" + cartArray[i].name + "' value='" + cartArray[i].count + "'>" +
                 "<button class='plus-item btn btn-primary input-group-addon' data-name='" + cartArray[i].name + "'>+</button></div></td>" +
