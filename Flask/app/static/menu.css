@@ -113,6 +113,10 @@ table>tfoot>tr>td {
     color: #ffffff;
 }
 
+.toast {
+    background-color: #51A351 !important;
+}
+
 .oggetto {
     text-align: left;
     font-size: 14px;

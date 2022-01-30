@@ -135,24 +135,16 @@ var shoppingCart = (function() {
 // *****************************************
 // Triggers / Events
 // ***************************************** 
-$(document).ready(function(){
+$(document).ready(function() {
     // Add item
-        $('#add-to-cart').on("click", function(event) {
-            event.preventDefault();
-            var name = $(this).data('name');
-            var price = Number($(this).data('price'));
-            var output = "<div style='position: relative; min-height: 300px;'>" +
-            "<div style='position: absolute; bottom: 0; right: 0; min-width: 300px;'>"+
-            "<div class='toast' data-delay='2000'>" +
-            "<button type='button' class='ml-2 mb-1 close' data-dismiss='toast'>&times;</button>"+
-            "<div class='toast-body bg-success'>" +
-            "<strong>Fatto!</strong> "+ name + " aggiunto al carrello." + "</div></div></div></div>";
-            $('#toast-alert').html(output);
-            $('#toast-alert').show();
-            shoppingCart.addItemToCart(name, price, 1);
-            console.log("1");
-            displayCart();
-        });
+    $('.add-to-cart').on("click", function(event) {
+        event.preventDefault();
+        var name = $(this).data('name');
+        var price = Number($(this).data('price'));
+        shoppingCart.addItemToCart(name, price, 1);
+        displayToast(name);
+        // displayToast(name);
+    });
 
     // Clear items
     $('.clear-cart').on("click", function() {
@@ -163,6 +155,30 @@ $(document).ready(function(){
     $('.car').on("click", function() {
         displayCart();
     })
+
+    function displayToast(name) {
+        var out = "Aggiunto " + name + " al carrello.";
+
+        toastr.options = {
+            "closeButton": true,
+            "debug": false,
+            "newestOnTop": true,
+            "progressBar": false,
+            "positionClass": "toast-bottom-right",
+            "preventDuplicates": false,
+            "onclick": null,
+            "showDuration": "300",
+            "hideDuration": "1000",
+            "timeOut": "3000",
+            "extendedTimeOut": "1000",
+            "showEasing": "swing",
+            "hideEasing": "linear",
+            "showMethod": "fadeIn",
+            "hideMethod": "fadeOut"
+        };
+
+        toastr["success"](out, "Fatto");
+    }
 
     function displayCart() {
         var cartArray = shoppingCart.listCart();
