@@ -135,15 +135,24 @@ var shoppingCart = (function() {
 // *****************************************
 // Triggers / Events
 // ***************************************** 
-$(document).ready(function() {
+$(document).ready(function(){
     // Add item
-    $('.add-to-cart').on("click", function(event) {
-        event.preventDefault();
-        var name = $(this).data('name');
-        var price = Number($(this).data('price'));
-        shoppingCart.addItemToCart(name, price, 1);
-        displayCart();
-    });
+        $('#add-to-cart').on("click", function(event) {
+            event.preventDefault();
+            var name = $(this).data('name');
+            var price = Number($(this).data('price'));
+            var output = "<div style='position: relative; min-height: 300px;'>" +
+            "<div style='position: absolute; bottom: 0; right: 0; min-width: 300px;'>"+
+            "<div class='toast' data-delay='2000'>" +
+            "<button type='button' class='ml-2 mb-1 close' data-dismiss='toast'>&times;</button>"+
+            "<div class='toast-body bg-success'>" +
+            "<strong>Fatto!</strong> "+ name + " aggiunto al carrello." + "</div></div></div></div>";
+            $('#toast-alert').html(output);
+            $('#toast-alert').show();
+            shoppingCart.addItemToCart(name, price, 1);
+            console.log("1");
+            displayCart();
+        });
 
     // Clear items
     $('.clear-cart').on("click", function() {
@@ -212,4 +221,4 @@ $(document).ready(function() {
     });
 
     displayCart();
-})
+});
