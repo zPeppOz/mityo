@@ -243,5 +243,18 @@ $(document).ready(function() {
         displayCart();
     });
 
-    displayCart();
+    $('#ordina').on("click", function(){
+        var carrello = shoppingCart.listCart();
+        const d = new Date;
+
+        var ordine = {
+            n_tavolo: nTavolo,
+            articoli: carrello,
+            data: Math.round(d.getTime()/1000)
+        }
+        
+    })
+
+
+
 });

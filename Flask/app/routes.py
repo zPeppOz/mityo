@@ -2,7 +2,7 @@ from re import M
 from typing import BinaryIO
 import uuid
 from dns.rdatatype import NULL
-from flask import render_template, jsonify
+from flask import render_template, jsonify, request
 from flask.json import dump
 from pymongo import mongo_client
 import qrcode
@@ -11,6 +11,9 @@ from flask_pymongo import PyMongo
 from flask_restful import Resource, Api
 from uuid import uuid4
 from bson.json_util import dumps,loads
+from bson import BSON
+from datetime import datetime
+import json
 
 import base64
 from io import BytesIO
@@ -73,5 +76,20 @@ def menu(n):
     jCaffe = loads(dumps(listCaffe, indent = 2))
     listApe = list(collMenu.find({'$text': {'$search': 'aperitivi'} }))
     jApe = loads(dumps(listApe, indent = 2))
-    return render_template('menu.html', Caffetteria=jCaffe, bibite=jBibite, Aperitivi=jApe, Cocktail=jCocktail, CocktailAn=jCocktailAn, VinoR=jVinoR, VinoB=jVinoB, Birre=jBirre)
+    return render_template('menu.html', Caffetteria=jCaffe, bibite=jBibite, Aperitivi=jApe, Cocktail=jCocktail, CocktailAn=jCocktailAn, VinoR=jVinoR, VinoB=jVinoB, Birre=jBirre, numeroTavolo=n)
     
+class Ordine(Resource):
+    def post():
+        if(request.is_json):
+            ordine = request.get_json()
+            db = mongo.db
+            collOrdini = db.ordini
+            collOrdini.insert_one(ordine)
+            return "1", 200
+        else:
+            return "0", 400
+        
+api.add_resource(Ordine, '/ordine')
+
+
+
