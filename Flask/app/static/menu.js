@@ -252,7 +252,35 @@ $(document).ready(function() {
             articoli: carrello,
             data: Math.round(d.getTime()/1000)
         }
-        
+        $.ajax({
+            url: '/ordine',
+            type: "POST",
+            contentType: "application/json",
+            data: JSON.stringify(ordine),
+            success: function(data){
+                toastr.options = {
+                    "closeButton": true,
+                    "debug": false,
+                    "newestOnTop": true,
+                    "progressBar": false,
+                    "positionClass": "toast-bottom-right",
+                    "preventDuplicates": false,
+                    "onclick": null,
+                    "showDuration": "300",
+                    "hideDuration": "1000",
+                    "timeOut": "3000",
+                    "extendedTimeOut": "1000",
+                    "showEasing": "swing",
+                    "hideEasing": "linear",
+                    "showMethod": "fadeIn",
+                    "hideMethod": "fadeOut"
+                };
+
+                toastr["success"]("Ordine effettuato", "Ordinato!");
+                $('#cart').modal('toggle');
+                shoppingCart.clearCart();
+            }
+        });
     })
 
 

@@ -13,6 +13,8 @@ from uuid import uuid4
 from bson.json_util import dumps,loads
 from bson import BSON
 from datetime import datetime
+import logging
+import sys
 import json
 
 import base64
@@ -29,12 +31,16 @@ api = Api(app)
 @app.route("/")
 @app.route('/index')
 def index():
-    return '404'
+    return render_template('index.html')
 
 @app.route('/qr')
 @app.route('/qr/')
 def qr():
     return render_template('qr.html')
+
+@app.route('/monitor')
+def monitor():
+    return render_template('monitor.html')
 
 class QRGen(Resource):
     def get(self,n):
@@ -80,17 +86,25 @@ def menu(n):
     return render_template('menu.html', Caffetteria=jCaffe, bibite=jBibite, Aperitivi=jApe, Cocktail=jCocktail, CocktailAn=jCocktailAn, VinoR=jVinoR, VinoB=jVinoB, Birre=jBirre, numeroTavolo=n)
     
 class Ordine(Resource):
-    def post():
+    def post(data):
         if(request.is_json):
             ordine = request.get_json()
             db = mongo.db
             collOrdini = db.ordini
             collOrdini.insert_one(ordine)
+            print(ordine, file=sys.stdout)
             return "1", 200
         else:
             return "0", 400
         
 api.add_resource(Ordine, '/ordine')
 
+class OrdineTest(Resource):
+    def post(dati):
+        if(request.is_json):
+            ordine = request.get_json()
+            print(ordine, file=sys.stdout)
 
 
+
+api.add_resource(OrdineTest, '/ordine_test')
