@@ -5,7 +5,7 @@
         QR
     </title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.js" integrity="sha512-n/4gHW3atM3QqRcbCn6ewmpxcLAHGaDjpEBu4xZd47N0W2oQ+6q7oc3PXstrJYXcbNU1OHdQ1T7pAP+gi5Yu8g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    <script>
+    <!-- <script>
         window.onload = function() {
             var genera = document.getElementById("btn");
             genera.onclick = function() {
@@ -13,8 +13,23 @@
                 location.href = "/genera_qr/" + formData;
             };
         }
+    </script> -->
+    <script>
+        $(document).ready(function(){
+            
+            $('.btn_gen').on('click', function(){
+                var data = $('#text').val();
+                const url = "/genera_qr/" + data;
+                
+                $.get(url, function(data){
+                    var image = new Image();
+                    image.src = 'data:image/png;base64,' + data;
+                    $("#qr").html(image);
+            });
+        });
+    });
     </script>
-    <script type="text/javascript" src="{{ url_for('static', filename='qr.js') }}"></script>
+    <!--<script type="text/javascript" src="{{ url_for('static', filename='qr.js') }}"></script>-->
     <meta charset="UTF-8" />
 </head>
 
@@ -25,7 +40,7 @@
             <input type="text" class="form-control" name="text" access="false" id="text">
         </div>
         <div class="formbuilder-button form-group field-button">
-            <button id="btn">Genera</button>
+            <button class="btn_gen">Genera</button>
         </div>
     </div>
     <p id="qr"></p>

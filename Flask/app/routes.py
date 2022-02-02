@@ -23,7 +23,7 @@ from app import app
 
 
 mongo = PyMongo(app, uri='mongodb+srv://mityo:9GJYYrN46bgxOTVT@testcluster.wcqu4.mongodb.net/mityo')
-app_url = '10.113.196.175:5000'
+# '10.113.196.175:5000'
 api = Api(app)
 
 @app.route("/")
@@ -38,6 +38,7 @@ def qr():
 
 class QRGen(Resource):
     def get(self,n):
+        app_url = request.url_root
         db = mongo.db
         tavoli = db.tavoli
         cList = tavoli.find({'n_tavolo': n})
@@ -46,7 +47,7 @@ class QRGen(Resource):
             tavoli.insert_one({
                 'n_tavolo': n
             })
-        url = app_url + '/menu/'+ str(n)
+        url = app_url + 'menu/'+ str(n)
         img = qrcode.make(url)
         buffer = BytesIO()
         img.save(buffer, format="JPEG")
