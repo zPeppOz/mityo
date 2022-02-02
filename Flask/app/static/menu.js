@@ -205,6 +205,8 @@ $(document).ready(function() {
         $('.show-cart').html(output);
         $('.total-cart').html(shoppingCart.totalCart());
         $('.total-count').html(shoppingCart.totalCount());
+        let str = "Tavolo " + nTavolo;
+        $('#tavolo').html(str);
     }
 
     // Delete item button
