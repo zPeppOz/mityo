@@ -16,10 +16,8 @@ from datetime import datetime
 import logging
 import sys
 import json
-
 import base64
 from io import BytesIO
-
 from qrcode import base
 from app import app
 
@@ -47,8 +45,6 @@ class QRGen(Resource):
         app_url = request.url_root
         db = mongo.db
         tavoli = db.tavoli
-        cList = tavoli.find({'n_tavolo': n})
-        json = dumps(cList, indent = 2)
         if tavoli.count_documents({'n_tavolo': n}) == 0:
             tavoli.insert_one({
                 'n_tavolo': n
@@ -99,12 +95,14 @@ class Ordine(Resource):
         
 api.add_resource(Ordine, '/ordine')
 
-class OrdineTest(Resource):
-    def post(dati):
-        if(request.is_json):
-            ordine = request.get_json()
-            print(ordine, file=sys.stdout)
+class MonitorAPI(Resource):
+    def get(self):
+        # json.dumps(json.JSONDecoder().decode(str_w_quotes))
+        db = mongo.db
+        collOrdini = db.ordini
+        ordiniL = list(collOrdini.find({'isDone' : False}))
+        jOrdini = dumps(ordiniL)
+        print(ordiniL, file=sys.stdout)
+        return ordiniL
 
-
-
-api.add_resource(OrdineTest, '/ordine_test')
+api.add_resource(MonitorAPI, '/monitor_get')

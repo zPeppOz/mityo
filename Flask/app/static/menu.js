@@ -245,21 +245,22 @@ $(document).ready(function() {
         displayCart();
     });
 
-    $('#ordina').on("click", function(){
+    $('#ordina').on("click", function() {
         var carrello = shoppingCart.listCart();
         const d = new Date;
 
         var ordine = {
             n_tavolo: nTavolo,
             articoli: carrello,
-            data: Math.round(d.getTime()/1000)
+            data: Math.round(d.getTime() / 1000),
+            isDone: false
         }
         $.ajax({
             url: '/ordine',
             type: "POST",
             contentType: "application/json",
             data: JSON.stringify(ordine),
-            success: function(data){
+            success: function(data) {
                 toastr.options = {
                     "closeButton": true,
                     "debug": false,
