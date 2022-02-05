@@ -1,5 +1,6 @@
+from hashlib import new
 from re import M
-from typing import BinaryIO
+from typing import BinaryIO, Dict, List, TypedDict
 import uuid
 from dns.rdatatype import NULL
 from flask import render_template, jsonify, request
@@ -79,6 +80,8 @@ def menu(n):
     jCaffe = loads(dumps(listCaffe, indent = 2))
     listApe = list(collMenu.find({'$text': {'$search': 'aperitivi'} }))
     jApe = loads(dumps(listApe, indent = 2))
+    print(listApe, file=sys.stdout)
+    print(jApe, file=sys.stdout)
     return render_template('menu.html', Caffetteria=jCaffe, bibite=jBibite, Aperitivi=jApe, Cocktail=jCocktail, CocktailAn=jCocktailAn, VinoR=jVinoR, VinoB=jVinoB, Birre=jBirre, numeroTavolo=n)
     
 class Ordine(Resource):
@@ -97,12 +100,13 @@ api.add_resource(Ordine, '/ordine')
 
 class MonitorAPI(Resource):
     def get(self):
-        # json.dumps(json.JSONDecoder().decode(str_w_quotes))
         db = mongo.db
         collOrdini = db.ordini
-        ordiniL = list(collOrdini.find({'isDone' : False}))
-        jOrdini = dumps(ordiniL)
-        print(ordiniL, file=sys.stdout)
-        return ordiniL
+        ordiniC = collOrdini.find({'isDone': False})
+        ordiniList = list(ordiniC)
+        ordiniJson = dumps(ordiniList)
+        print(ordiniJson, file=sys.stdout)
+        return ordiniJson
+
 
 api.add_resource(MonitorAPI, '/monitor_get')
