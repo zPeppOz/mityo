@@ -7,7 +7,9 @@
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
     <script type="text/javascript" src="{{ url_for('static', filename='monitor.js') }}"></script>
-    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment-with-locales.min.js" integrity="sha512-LGXaggshOkD/at6PFNcp2V2unf9LzFq6LE+sChH7ceMTDP0g2kn6Vxwgg7wkPP7AAtX+lmPqPdxB47A0Nz0cMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='monitor.css') }}">
     <title>
         Monitor Ordini
     </title>
@@ -17,95 +19,46 @@
 </head>
 
 <body>
-    <div class="container-md pt-5 ">
+    <div class="container pt-3 p-0 ">
         <div class="row row-cols-1 row-cols-md-4 g-3 ">
             <div class="col">
-                <div class="card bg-black text-white h-100">
-                    <div class="card-body ">
-                        <h3 class="card-title">Ordine #45781</h4>
-                            <h5 class="card-subtitle">Tavolo 2</h5>
-                            <p class="card-text">1x Caffè Espresso</p>
+                <div class="card h-100">
+                    <div class="card-header">
+                        <div class="row">
+                            <div class="col-8">#</div>
+                            <div class="col-4">nTavolo</div>
+                        </div>
                     </div>
-                </div>
-            </div>
-            <div class="col">
-                <div class="card bg-black text-white h-100">
-                    <div class="card-body ">
-                        <h3 class="card-title">Ordine #45781</h4>
-                            <h5 class="card-subtitle">Tavolo 2</h5>
-                            <p class="card-text">1x Caffè Espresso</p>
+                    <div class="card-body">
+                        <div class="card-subtitle mb-3 text-center" style="font-size: 1.5rem;">
+                            <--- Categoria --->
+                        </div>
+                        <div class="row">
+                            <div class="col-2 text-center font-card-text">1</div>
+                            <div class="col-10 text-left px-4 font-card-text">Caffè Espresso</div>
+                        </div>
+                        <div class="row">
+                            <div class="col-2 text-center font-card-text">1</div>
+                            <div class="col-10 text-left px-4 font-card-text">Caffè Espresso</div>
+                        </div>
+                        <div class="row">
+                            <div class="col-2 text-center font-card-text">1</div>
+                            <div class="col-10 text-left px-4 font-card-text">Caffè Espresso</div>
+                        </div>
+                        <div class="row">
+                            <div class="col-2 text-center font-card-text">1</div>
+                            <div class="col-10 text-left px-4 font-card-text">Caffè Espresso</div>
+                        </div>
+                        <div class="row">
+                            <div class="col-2 text-center font-card-text">1</div>
+                            <div class="col-10 text-left px-4 font-card-text">Caffè Espresso</div>
+                        </div>
                     </div>
-                </div>
-            </div>
-            <div class="col">
-                <div class="card bg-black text-white h-100">
-                    <div class="card-body ">
-                        <h3 class="card-title">Ordine #45781</h4>
-                            <h5 class="card-subtitle">Tavolo 2</h5>
-                            <p class="card-text">1x Caffè Espresso</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col">
-                <div class="card bg-black text-white h-100">
-                    <div class="card-body ">
-                        <h3 class="card-title">Ordine #45781</h4>
-                            <h5 class="card-subtitle">Tavolo 2</h5>
-                            <p class="card-text">1x Caffè Espresso</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col">
-                <div class="card bg-black text-white h-100">
-                    <div class="card-body ">
-                        <h3 class="card-title">Ordine #45781</h4>
-                            <h5 class="card-subtitle">Tavolo 2</h5>
-                            <p class="card-text">1x Caffè Espresso</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col">
-                <div class="card bg-black text-white h-100">
-                    <div class="card-body ">
-                        <h3 class="card-title">Ordine #45781</h4>
-                            <h5 class="card-subtitle">Tavolo 2</h5>
-                            <p class="card-text">1x Caffè Espresso</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col">
-                <div class="card bg-black text-white h-100">
-                    <div class="card-body ">
-                        <h3 class="card-title">Ordine #45781</h4>
-                            <h5 class="card-subtitle">Tavolo 2</h5>
-                            <p class="card-text">1x Caffè Espresso</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col">
-                <div class="card bg-black text-white h-100">
-                    <div class="card-body ">
-                        <h3 class="card-title">Ordine #45781</h4>
-                            <h5 class="card-subtitle">Tavolo 2</h5>
-                            <p class="card-text">1x Caffè Espresso</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col">
-                <div class="card bg-black text-white h-100">
-                    <div class="card-body ">
-                        <h3 class="card-title">Ordine #45781</h4>
-                            <h5 class="card-subtitle">Tavolo 2</h5>
-                            <p class="card-text">1x Caffè Espresso</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col">
-                <div class="card bg-black text-white h-100">
-                    <div class="card-body ">
-                        <h3 class="card-title">Ordine #45781</h4>
-                            <h5 class="card-subtitle">Tavolo 2</h5>
-                            <p class="card-text">1x Caffè Espresso</p>
+                    <div class="card-footer">
+                        <div class="row">
+                            <div class="col-6 text-left">Tempo</div>
+                            <div class="col-6">Bottone</div>
+                        </div>
                     </div>
                 </div>
             </div>

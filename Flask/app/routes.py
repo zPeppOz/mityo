@@ -1,3 +1,5 @@
+from ast import parse
+from crypt import methods
 from hashlib import new
 from re import M
 from typing import BinaryIO, Dict, List, TypedDict
@@ -105,8 +107,18 @@ class MonitorAPI(Resource):
         ordiniC = collOrdini.find({'isDone': False})
         ordiniList = list(ordiniC)
         ordiniJson = dumps(ordiniList)
-        print(ordiniJson, file=sys.stdout)
+        # ordiniJson = parse_json(ordiniList)
+        print(ordiniList, file=sys.stdout)
         return ordiniJson
 
+def parse_json(data):
+    return json.loads(json.dumps(data))
 
 api.add_resource(MonitorAPI, '/monitor_get')
+
+@app.route('/monitor_set/<id>', methods=['GET'])
+def monitor_set(id):
+    db = mongo.db
+    ordini = db.ordini
+
+

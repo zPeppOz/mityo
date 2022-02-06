@@ -259,7 +259,7 @@ $(document).ready(function() {
             url: '/ordine',
             type: "POST",
             contentType: "application/json",
-            data: JSON.stringify(ordine),
+            data: ordine,
             success: function(data) {
                 toastr.options = {
                     "closeButton": true,
