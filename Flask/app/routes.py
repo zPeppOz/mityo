@@ -1,28 +1,17 @@
-from ast import parse
-from crypt import methods
-from hashlib import new
-from re import M
-from typing import BinaryIO, Dict, List, TypedDict
-import uuid
 from dns.rdatatype import NULL
 from flask import render_template, jsonify, request
 from flask.json import dump
-from pymongo import mongo_client
 import qrcode
-from PIL import Image
 from flask_pymongo import PyMongo
 from flask_restful import Resource, Api
-from uuid import uuid4
 from bson.json_util import dumps,loads
 from bson import BSON
-from datetime import datetime
-import logging
 import sys
 import json
 import base64
 from io import BytesIO
-from qrcode import base
 from app import app
+import requests
 
 
 mongo = PyMongo(app, uri='mongodb+srv://mityo:9GJYYrN46bgxOTVT@testcluster.wcqu4.mongodb.net/mityo')
@@ -101,15 +90,31 @@ class Ordine(Resource):
 api.add_resource(Ordine, '/ordine')
 
 class MonitorAPI(Resource):
+    # def get(self):
+    #     db = mongo.db
+    #     collOrdini = db.ordini
+    #     ordiniC = collOrdini.find({'isDone': False})
+    #     ordiniList = list(ordiniC)
+    #     ordiniJson = dumps(ordiniList)
+    #     # ordiniJson = parse_json(ordiniList)
+    #     print(ordiniList, file=sys.stdout)
+    #     return ordiniJson
+
     def get(self):
-        db = mongo.db
-        collOrdini = db.ordini
-        ordiniC = collOrdini.find({'isDone': False})
-        ordiniList = list(ordiniC)
-        ordiniJson = dumps(ordiniList)
-        # ordiniJson = parse_json(ordiniList)
-        print(ordiniList, file=sys.stdout)
-        return ordiniJson
+        url = "https://data.mongodb-api.com/app/data-grblx/endpoint/data/beta/action/find"
+        payload = json.dumps({
+            "collection": "ordini",
+            "database": "mityo",
+            "dataSource": "TestCluster"
+        })
+
+        headers = {
+            'Content-Type': 'application/json',
+            'Access-Control-Request-Headers': '*',
+            'api-key': 'HE5u1sWjGt8IllQRCNodMFSguQBcrg5z9TC7fhUGkkRQgCuAsCVwdJuzrw30esyO'
+        }
+        response = requests.request("POST", url, headers=headers, data=payload)
+        return response.text
 
 def parse_json(data):
     return json.loads(json.dumps(data))

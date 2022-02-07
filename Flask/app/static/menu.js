@@ -252,14 +252,14 @@ $(document).ready(function() {
         var ordine = {
             n_tavolo: nTavolo,
             articoli: carrello,
-            data: Math.round(d.getTime() / 1000),
+            data: moment.now(),
             isDone: false
         }
         $.ajax({
             url: '/ordine',
             type: "POST",
             contentType: "application/json",
-            data: ordine,
+            data: JSON.stringify(ordine),
             success: function(data) {
                 toastr.options = {
                     "closeButton": true,
