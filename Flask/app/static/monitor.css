@@ -1,3 +1,9 @@
 .font-card-text {
     font-size: 1.25rem;
 }
+
+.card-footer{
+    position: relative;
+    bottom: 0;
+    width: 90%;
+}

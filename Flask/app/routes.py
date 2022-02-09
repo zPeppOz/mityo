@@ -1,3 +1,5 @@
+from ast import Try
+from operator import truediv
 from dns.rdatatype import NULL
 from flask import render_template, jsonify, request
 from flask.json import dump
@@ -90,22 +92,15 @@ class Ordine(Resource):
 api.add_resource(Ordine, '/ordine')
 
 class MonitorAPI(Resource):
-    # def get(self):
-    #     db = mongo.db
-    #     collOrdini = db.ordini
-    #     ordiniC = collOrdini.find({'isDone': False})
-    #     ordiniList = list(ordiniC)
-    #     ordiniJson = dumps(ordiniList)
-    #     # ordiniJson = parse_json(ordiniList)
-    #     print(ordiniList, file=sys.stdout)
-    #     return ordiniJson
-
     def get(self):
         url = "https://data.mongodb-api.com/app/data-grblx/endpoint/data/beta/action/find"
         payload = json.dumps({
             "collection": "ordini",
             "database": "mityo",
-            "dataSource": "TestCluster"
+            "dataSource": "TestCluster",
+            "filter": {
+                "isDone": False
+            }
         })
 
         headers = {
@@ -123,7 +118,26 @@ api.add_resource(MonitorAPI, '/monitor_get')
 
 @app.route('/monitor_set/<id>', methods=['GET'])
 def monitor_set(id):
-    db = mongo.db
-    ordini = db.ordini
+    url = "https://data.mongodb-api.com/app/data-grblx/endpoint/data/beta/action/updateOne"
+    payload = json.dumps({
+        "collection": "ordini",
+        "database": "mityo",
+        "dataSource": "TestCluster",
+        "filter": {
+            "_id": {"$oid": id}
+        }, 
+        "update":{
+            "$set":{
+                "isDone": True
+            }
+        }
+    })
 
-
+    headers = {
+        'Content-Type': 'application/json',
+        'Access-Control-Request-Headers': '*',
+        'api-key': 'HE5u1sWjGt8IllQRCNodMFSguQBcrg5z9TC7fhUGkkRQgCuAsCVwdJuzrw30esyO'
+    }
+    response = requests.request("POST", url, headers=headers, data=payload)
+    return "1", 200
+    
