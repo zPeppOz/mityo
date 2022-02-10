@@ -28,5 +28,10 @@ Così il webserver parte in modo tale da essere raggiungibile su tutta la rete l
 ```
 flask run 
 ```
+
+## Uso
+Per usare la web-app, basta aprire con un browser l'indirizzo IP della macchina locale su cui è hostato il server, alla porta 5000 (es. 192.168.1.20:5000)
+
+Andando su questo indirizzo, si aprirà una pagina contenente i reindirizzamenti alle pagine del menù, della generazione dei codici QR, e del monitor degli ordini.
 ---
 Progetto Realizzato da Giuseppe Setaro, Emmanuele Noviello e Prisco Sorgente, per l'esame di Tecnologie Web del prof. Raffaele Montella.
