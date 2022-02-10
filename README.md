@@ -24,7 +24,7 @@ Spostarsi nella cartella Flask e far partire il web-server
 ```
 flask run --host 0.0.0.0
 ```
-così il webserver parte in modo tale da essere raggiungibile su tutta la rete locale, per farlo partire solo sul localhost:
+Così il webserver parte in modo tale da essere raggiungibile su tutta la rete locale, per farlo partire solo sul localhost:
 ```
 flask run 
 ```
