@@ -21,7 +21,7 @@ function display(ordini) {
 
         output += "<div class='card-footer pt-1 p-1'>" + "<div class='row'>" +
             "<div class='col-8 text-left'>" + moment(ordini[j].data).calendar() + "</div>" +
-            "<div class='col-4'>" + "<button type='button' data-id='"+ ordini[j]._id +"' class='btn btn-success done'>Fatto</button>" + 
+            "<div class='col-4'>" + "<button type='button' id='fatto' data-id='"+ ordini[j]._id +"' class='btn btn-success'>Fatto</button>" + 
             "</div>" + "</div>" + "</div>" + "</div>" + "</div>" + "</div>";
     }
 
@@ -29,10 +29,7 @@ function display(ordini) {
 
 }
 
-$(document).ready(function() {
-
-    $('#out').html("Nessun Ordine Ricevuto");
-
+function getDocument(){
     $.ajax({
         url: '/monitor_get',
         type: "GET",
@@ -40,13 +37,21 @@ $(document).ready(function() {
         success: function(data) {
             ordini = JSON.parse(data);
             moment.locale('it');
-            display(ordini);
+            if(typeof ordini.documents !== undefined && ordini.documents.length > 0){
+                display(ordini);
+            }else{
+                $('#out').html("Nessun Ordine Ricevuto");
+            }
         }
     });
+}
 
-    
+$(document).ready(function() {
 
-    $('.done').on("click", function() {
+    $('#out').html("Nessun Ordine Ricevuto");
+    getDocument();
+    $(document).on("click", "#fatto" ,function(event) {
+        event.preventDefault();
         console.log(1);
         var id = $(this).data('id');
         var url = '/monitor_set/' + id;
@@ -54,12 +59,10 @@ $(document).ready(function() {
             function (data) {
                 console.log(data);
                 if(data == 1){
-                    location.reload(true);
+                    getDocument();
                 }
-            }
-        );
+            });
     });
 
-
-
+    setInterval('getDocument()', 10000);
 });
