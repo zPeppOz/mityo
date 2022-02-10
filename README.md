@@ -16,7 +16,7 @@ Spostarsi nella cartella mityo e creare un virtual environment per Python
 ```
 python3 -m venv venv
 ```
-Installare le librerie richieste
+Una volta attivato il virtual environment, installare le librerie richieste
 ```
 pip install -r requirements.txt
 ```
