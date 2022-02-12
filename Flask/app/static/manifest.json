@@ -1,0 +1,10 @@
+{
+    "name": "MITYO - May I Take Your Order?",
+    "short_name": "MITYO",
+    "lang": "it-IT",
+    "start_url": "index.html",
+    "display": "standalone",
+    "background_color": "white",
+    "theme_color": "white"
+  }
+  
