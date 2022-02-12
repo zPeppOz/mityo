@@ -1,6 +1,5 @@
 from ast import Try
 from operator import truediv
-from dns.rdatatype import NULL
 from flask import render_template, jsonify, request
 from flask.json import dump
 import qrcode
