@@ -18,6 +18,7 @@ python3 -m venv venv
 ```
 Una volta attivato il virtual environment, installare le librerie richieste
 ```
+pip install wheel
 pip install -r requirements.txt
 ```
 Spostarsi nella cartella Flask e far partire il web-server
